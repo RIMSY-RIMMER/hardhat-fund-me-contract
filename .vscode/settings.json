@@ -1,0 +1,9 @@
+{
+    "editor.tokenColorCustomizations": {
+        "comments": "",
+        "textMateRules": []
+    },
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "solidity-va.uml.actors.enable": true,
+    "inline-bookmarks.view.showVisibleFilesOnly": true
+}
