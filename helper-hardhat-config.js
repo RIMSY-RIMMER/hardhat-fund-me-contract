@@ -3,6 +3,9 @@ const networkConfig = {
         name: "localhost"
     },
 
+    1337: {
+        name: "LocalGanache"
+    },
     // Goerli chain ID: 5
     5: {
         name: "goerli",
@@ -10,7 +13,7 @@ const networkConfig = {
     }
 }
 
-const developmentChains = ["hardhat", "localhost"]
+const developmentChains = ["hardhat", "localhost", "LocalGanache"]
 // dole potřebujeme exportovat networkConfig skript
 // aby s ním mohli pracovat ostatní skripty
 // poté ho importujeme do deploy skriptu

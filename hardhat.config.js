@@ -9,8 +9,10 @@ require("hardhat-gas-reporter")
 const GOERLI_RPC_URL =
     process.env.GOERLI_RPC_URL ||
     "https://eth-goerli.alchemyapi.io/v2/your-api-key"
+const GANACHE_RPC_URL = process.env.GANACHE_RPC_URL || ""
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || ""
 const PRIVATE_KEY = process.env.PRIVATE_KEY || ""
+const PRIVATE_KEY2 = process.env.PRIVATE_KEY2 || ""
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || ""
 
 module.exports = {
@@ -30,6 +32,12 @@ module.exports = {
             accounts: [PRIVATE_KEY],
             chainId: 5,
             blockConfirmations: 6
+        },
+
+        LocalGanache: {
+            url: GANACHE_RPC_URL,
+            chainId: 1337,
+            accounts: [PRIVATE_KEY2]
         },
 
         localhost: {

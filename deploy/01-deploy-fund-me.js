@@ -14,7 +14,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     // const ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
     // let --> aby mohlo být updatováno
     let ethUsdPriceFeedAddress
-    if (chainId == 31337) {
+    if (chainId == 31337 || 1337) {
         const ethUsdAggregator = await deployments.get("MockV3Aggregator")
         ethUsdPriceFeedAddress = ethUsdAggregator.address
         // podmínka: pokud nejsme na development chainu, tak:

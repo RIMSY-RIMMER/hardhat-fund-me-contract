@@ -29,6 +29,8 @@ contract FundMe {
     // můžeme je dát private a funkcí zavolat dole
     mapping(address => uint256) private s_addressToAmountFunded;
     address[] private s_funders;
+    address[] private s_topFunders;
+    mapping(address => uint256) private s_topFundersToAmountFunded;
     // Could we make this constant?  /* hint: no! We should make it immutable! */
     address private immutable i_owner;
     uint256 public constant MINIMUM_USD = 50 * 10 ** 18;
@@ -73,6 +75,41 @@ contract FundMe {
         // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
         s_addressToAmountFunded[msg.sender] += msg.value;
         s_funders.push(msg.sender);
+
+        // Update the list of top funders
+        if (s_topFunders.length < 5) {
+            // If the list is not full, just add the funder to the list
+            s_topFunders.push(msg.sender);
+            s_topFundersToAmountFunded[msg.sender] = msg.value;
+        } else {
+            // If the list is full, check if the funder's contribution is greater than the smallest contribution in the list
+            uint256 smallestContribution = s_topFundersToAmountFunded[
+                s_topFunders[0]
+            ];
+            for (uint256 i = 1; i < s_topFunders.length; i++) {
+                if (
+                    s_topFundersToAmountFunded[s_topFunders[i]] <
+                    smallestContribution
+                ) {
+                    smallestContribution = s_topFundersToAmountFunded[
+                        s_topFunders[i]
+                    ];
+                }
+            }
+            if (msg.value > smallestContribution) {
+                // If the funder's contribution is greater than the smallest contribution, find the address with the smallest contribution and replace it with the new funder
+                for (uint256 i = 0; i < s_topFunders.length; i++) {
+                    if (
+                        s_topFundersToAmountFunded[s_topFunders[i]] ==
+                        smallestContribution
+                    ) {
+                        s_topFunders[i] = msg.sender;
+                        s_topFundersToAmountFunded[msg.sender] = msg.value;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     function withdraw() public onlyOwner {
@@ -122,6 +159,16 @@ contract FundMe {
         address fundingAddress
     ) public view returns (uint256) {
         return s_addressToAmountFunded[fundingAddress];
+    }
+
+    function getTopFunder(uint256 index) public view returns (address) {
+        return s_topFunders[index];
+    }
+
+    function getTopFunderContribution(
+        address topFunderAddress
+    ) public view returns (uint256) {
+        return s_topFundersToAmountFunded[topFunderAddress];
     }
 
     function getVersion() public view returns (uint256) {
