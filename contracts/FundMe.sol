@@ -10,7 +10,7 @@ error FundMe__NotOwner();
 // Style guide - Interfaces, Libraries, Contracts
 
 /** @title Kontrakt pro crowd funding
- *  @author Rimsy
+ *  @author rimsy_rimmer
  *  @notice Je to jen test kontrakt
  *  @dev Implemetace price feedů a dalšín knihoven
  */
