@@ -8,7 +8,7 @@ This repository contains the backend code for the FundMe project. There is a sep
 
 #
 
-#### Features
+**Features**
 
 - Allows users to contribute ETH to the contract
 - Tracks the contributions made by each user
@@ -16,6 +16,8 @@ This repository contains the backend code for the FundMe project. There is a sep
 - Requires a minimum amount of USD to be contributed
 - Uses a Chainlink `priceFeed` to convert ETH values to USD values
 - Restricts certain functions to only be called by the owner of the contract
+
+#
 
 Try running some of the following tasks:
 
