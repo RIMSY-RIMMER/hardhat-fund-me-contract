@@ -12,7 +12,6 @@ contract FundMe {
     using PriceConverter for uint256;
 
     // Style guide - State Variables
-    // můžeme je dát private a funkcí zavolat dole
     mapping(address => uint256) private s_addressToAmountFunded;
     address[] private s_funders;
     address[] private s_topFunders;
@@ -31,8 +30,7 @@ contract FundMe {
 
     // Style guide - Functions
     // Functions Order:
-    // 1. constructor 2.recieve 3.fallback 4. external
-    // 5. public 6. internal 7. private
+    // 1. constructor 2.recieve 3.fallback 4. external 5. public 6. internal 7. private
     constructor(address priceFeed) {
         s_priceFeed = AggregatorV3Interface(priceFeed);
         i_owner = msg.sender;
