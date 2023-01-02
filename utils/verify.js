@@ -1,7 +1,6 @@
-// protože používáme run command
 const { run } = require("hardhat")
 
-// verify funkce
+// verification script
 const verify = async (contractAdress, args) => {
     console.log("Verifying contract...")
     try {

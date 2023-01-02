@@ -19,7 +19,7 @@ module.exports = {
     // solidity: "0.8.8",
     // solidity object
     solidity: {
-        // list compilerů
+        // list of compilers
         compilers: [{ version: "0.8.8" }, { version: "0.6.6" }]
     },
     etherscan: {
@@ -48,7 +48,7 @@ module.exports = {
 
     namedAccounts: {
         deployer: {
-            default: 0 // // here this will by default take the first account as deployer
+            default: 0 // here this will by default take the first account as deployer
         }
     },
     gasReporter: {

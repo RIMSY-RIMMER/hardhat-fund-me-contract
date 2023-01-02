@@ -7,20 +7,6 @@ import "./PriceConverter.sol";
 // Error codes
 error FundMe__NotOwner();
 
-// Style guide - Interfaces, Libraries, Contracts
-
-/** @title Kontrakt pro crowd funding
- *  @author rimsy_rimmer
- *  @notice Je to jen test kontrakt
- *  @dev Implemetace price feedů a dalšín knihoven
- */
-
-// State variables (variables declared outside of functions)
-// highlight contract local stateVars (golden box)
-// alert on a shadowed variable (red box)
-// highlight const stateVar (green box)
-// highlight inherited stateVar (blue box Approval)
-
 contract FundMe {
     // Style guide - Type Declarations
     using PriceConverter for uint256;
@@ -45,15 +31,8 @@ contract FundMe {
 
     // Style guide - Functions
     // Functions Order:
-    //// constructor
-    //// recieve
-    //// fallback
-    //// external
-    //// public
-    //// internal
-    //// private
-    // funkce, která je zavolaná jako první, když deployneme SCaddressToAmountFunded
-    // u funkce můžeme nastavit parametry --> adresa s_priceFeedu
+    // 1. constructor 2.recieve 3.fallback 4. external
+    // 5. public 6. internal 7. private
     constructor(address priceFeed) {
         s_priceFeed = AggregatorV3Interface(priceFeed);
         i_owner = msg.sender;
@@ -122,12 +101,6 @@ contract FundMe {
             s_addressToAmountFunded[funder] = 0;
         }
         s_funders = new address[](0);
-        // // transfer
-        // payable(msg.sender).transfer(address(this).balance);
-        // // send
-        // bool sendSuccess = payable(msg.sender).send(address(this).balance);
-        // require(sendSuccess, "Send failed");
-        // call
         (bool callSuccess, ) = payable(msg.sender).call{
             value: address(this).balance
         }("");
@@ -136,7 +109,7 @@ contract FundMe {
 
     function cheaperWithdraw() public onlyOwner {
         address[] memory funders = s_funders;
-        // mappings can't be in memory, sorry!
+        // mappings can't be in memory
         for (
             uint256 funderIndex = 0;
             funderIndex < funders.length;
@@ -146,15 +119,10 @@ contract FundMe {
             s_addressToAmountFunded[funder] = 0;
         }
         s_funders = new address[](0);
-        // payable(msg.sender).transfer(address(this).balance);
         (bool success, ) = i_owner.call{value: address(this).balance}("");
         require(success);
     }
 
-    /** @notice Gets the amount that an address has funded
-     *  @param fundingAddress the address of the funder
-     *  @return the amount funded
-     */
     function getAddressToAmountFunded(
         address fundingAddress
     ) public view returns (uint256) {
@@ -187,24 +155,3 @@ contract FundMe {
         return s_priceFeed;
     }
 }
-
-// Explainer from: https://solidity-by-example.org/fallback/
-// Ether is sent to contract
-//      is msg.data empty?
-//          /   \
-//         yes  no
-//         /     \
-//    receive()?  fallback()
-//     /   \
-//   yes   no
-//  /        \
-//receive()  fallback()
-
-// Concepts we didn't cover yet (will cover in later sections)
-// 1. Enum
-// 2. Events
-// 3. Try / Catch
-// 4. Function Selector
-// 5. abi.encode / decode
-// 6. Hash with keccak256
-// 7. Yul / Assembly
