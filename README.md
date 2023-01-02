@@ -6,7 +6,9 @@ It is a Solidity smart contract that enables users to contribute ETH to it. It t
 
 This repository contains the backend code for the FundMe project. There is a separate repository for the basic frontend code.
 
-## Features
+#
+
+#### Features
 
 - Allows users to contribute ETH to the contract
 - Tracks the contributions made by each user
