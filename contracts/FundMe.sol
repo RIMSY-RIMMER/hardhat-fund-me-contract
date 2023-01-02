@@ -1,34 +1,35 @@
 // SPDX-License-Identifier: MIT
-// Style guide - Pragma
 pragma solidity ^0.8.8;
-// Imports
+
+/* -------------- Imports --------------*/
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
-// Error codes
+
+/* -------------- Errors --------------*/
 error FundMe__NotOwner();
 
+/* -------------- Contract --------------*/
 contract FundMe {
-    // Style guide - Type Declarations
+    /* -------------- Type Declaration  --------------*/
     using PriceConverter for uint256;
 
-    // Style guide - State Variables
+    /* --------------State Variables (storage / non-storage) -------------- */
     mapping(address => uint256) private s_addressToAmountFunded;
     address[] private s_funders;
     address[] private s_topFunders;
     mapping(address => uint256) private s_topFundersToAmountFunded;
-    // Could we make this constant?  /* hint: no! We should make it immutable! */
     address private immutable i_owner;
     uint256 public constant MINIMUM_USD = 50 * 10 ** 18;
     AggregatorV3Interface private s_priceFeed;
 
-    // Style guide - Modifier
+    /* -------------- Modifier -------------- */
     modifier onlyOwner() {
         // require(msg.sender == owner);
         if (msg.sender != i_owner) revert FundMe__NotOwner();
         _;
     }
 
-    // Style guide - Functions
+    /* -------------- Functions --------------*/
     // Functions Order:
     // 1. constructor 2.recieve 3.fallback 4. external 5. public 6. internal 7. private
     constructor(address priceFeed) {
@@ -121,6 +122,7 @@ contract FundMe {
         require(success);
     }
 
+    /* -------------- View / Pure getter functions -------------- */
     function getAddressToAmountFunded(
         address fundingAddress
     ) public view returns (uint256) {
