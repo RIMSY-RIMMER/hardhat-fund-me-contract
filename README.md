@@ -1,5 +1,8 @@
 # Fund Me Hardhat Project
 
+<img src="./img/FundMe.png" align="right"
+     alt="FundMe" width="240" height="360">
+
 This contract was created using the `Hardhat` development framework and following a `32 hour YouTube course by Patrick Collins`. 
 
 It is a Solidity smart contract that enables users to contribute ETH to it. It tracks the contributions made by each user and includes a function to update a list of top funders, who are the users that have contributed the most amount of ETH. In order to contribute, users must contribute at least a minimum amount of USD, which is specified by the MINIMUM_USD constant. The contract uses a price feed contract to convert ETH values to USD values. Only the owner of the contract is able to call certain functions that are restricted by the onlyOwner modifier.
@@ -7,10 +10,6 @@ It is a Solidity smart contract that enables users to contribute ETH to it. It t
 This repository contains the `backend code` for the FundMe project. There is a separate repository for the basic `frontend code`.
 
 #
-
-<img src="./image/FundMe.png" align="right"
-     alt="FundMe" width="120" height="178">
-
 
 **Features**
 
