@@ -1,4 +1,3 @@
-// vytáhnutí networkConfigu ze souboru: "../helper-hardhat-config"
 const { networkConfig, developmentChains } = require("../helper-hardhat-config")
 const { network } = require("hardhat")
 const { verify } = require("../utils/verify")
@@ -22,8 +21,8 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const args = [ethUsdPriceFeedAddress]
     const fundMe = await deploy("FundMe", {
         from: deployer,
-        args: args, // tady bude priceFeed adresa
-        log: true, // custom loging, jako console.log
+        args: args, // price feed address
+        log: true, // custom loging
         waitConfirmations: network.config.blockConfirmations || 1
     })
 
